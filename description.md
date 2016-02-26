@@ -65,3 +65,16 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 -  Handler interceptor
 -  Spring Exception Handling
 -  <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFZkpVM19QWFBOQ2c">Деплой в Heroku</a>
+
+
+### from me:
+mealList
+                .stream()
+                .filter(s -> {
+                    if(s.getDateTime().toLocalDate().equals(now)) call += s.getCalories();
+                    return s.getDateTime().toLocalDate().equals(now) ;
+                    })
+                .forEach(s -> new UserMeal(s.getDateTime(),s.getDescription(),s.getCalories()));
+//                .mapToInt(Integer::parseIntgetCalories)
+//                .sorted()
+        System.out.println(call);
