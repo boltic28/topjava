@@ -24,10 +24,7 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,20,0), "Ужин", 500),
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,10,0), "Завтрак", 1000),
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,13,0), "Обед", 500),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,20,0), "Ужин", 510),
-                new UserMeal(LocalDateTime.of(2016, Month.FEBRUARY, 28,10,0), "Завтрак", 1000),
-                new UserMeal(LocalDateTime.of(2016, Month.FEBRUARY, 28,13,0), "Обед", 500),
-                new UserMeal(LocalDateTime.of(2016, Month.FEBRUARY, 28,20,0), "Ужин", 510)
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,20,0), "Ужин", 510)
         );
 
         getFilteredMealsWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12,0), 2000);
@@ -38,13 +35,13 @@ public class UserMealsUtil {
 
         List<UserMealWithExceed> list = new ArrayList<>();
 
-        // находим общую сумму ккал за день
+        // check summing of the calories per day
         int sumCall = mealList
                 .stream()
                 .filter(s -> s.getDateTime().toLocalDate().equals(LocalDate.now()))
                 .collect(Collectors.summingInt(UserMeal::getCalories));
 
-        // находим прием пищи в указаный период и создаем соответствующий Meal с дальнейшим помощенгием в лист
+        // find meal in the period (TimeS, TimeE) and create MealWithEx, add to list
         mealList
                 .stream()
                 .filter(s -> s.getDateTime().toLocalDate().equals(LocalDate.now()) &&
