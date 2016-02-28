@@ -10,6 +10,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * GKislin
@@ -23,38 +24,34 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,20,0), "Ужин", 500),
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,10,0), "Завтрак", 1000),
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,13,0), "Обед", 500),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,20,0), "Ужин", 510)
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,20,0), "Ужин", 510),
+                new UserMeal(LocalDateTime.of(2016, Month.FEBRUARY, 28,10,0), "Завтрак", 1000),
+                new UserMeal(LocalDateTime.of(2016, Month.FEBRUARY, 28,13,0), "Обед", 500),
+                new UserMeal(LocalDateTime.of(2016, Month.FEBRUARY, 28,20,0), "Ужин", 510)
         );
+
         getFilteredMealsWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12,0), 2000);
-//        .toLocalDate();
-//        .toLocalTime();
     }
 
-    public static List<UserMealWithExceed>  getFilteredMealsWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        List<UserMealWithExceed> finalListOfMeal = new ArrayList<>();
-        List<UserMeal> tmpListOfMeals = new ArrayList<>();
+    public static List<UserMealWithExceed>  getFilteredMealsWithExceeded(
+            List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
 
-        //   выставляем текущую дату
-        LocalDate now = LocalDate.now();
+        List<UserMealWithExceed> list = new ArrayList<>();
 
-        // выбираем что съедено сегодня и считаем ккал
-        for (UserMeal meal: mealList) {
-            // отнимаем от разрешенного кол-ва то что съедено
-            if(meal.getDateTime().toLocalDate().equals(now)) {
-                caloriesPerDay -= meal.getCalories() ;
-                tmpListOfMeals.add(meal);
-            }
-        }
+        // находим общую сумму ккал за день
+        int sumCall = mealList
+                .stream()
+                .filter(s -> s.getDateTime().toLocalDate().equals(LocalDate.now()))
+                .collect(Collectors.summingInt(UserMeal::getCalories));
 
-        // исходя из съеденных ккал выдаем значения
-        for (UserMeal meal: tmpListOfMeals) {
-            if (TimeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime)) {
-                finalListOfMeal.add(new UserMealWithExceed(meal.getDateTime(),
-                        meal.getDescription(), meal.getCalories(),
-                        (caloriesPerDay < 0)));
-            }
-        }
+        // находим прием пищи в указаный период и создаем соответствующий Meal с дальнейшим помощенгием в лист
+        mealList
+                .stream()
+                .filter(s -> s.getDateTime().toLocalDate().equals(LocalDate.now()) &&
+                        TimeUtil.isBetween(s.getDateTime().toLocalTime(), startTime, endTime))
+                .forEach(s -> list.add(new UserMealWithExceed(s.getDateTime(), s.getDescription(),
+                        s.getCalories(), sumCall > caloriesPerDay)));
 
-        return finalListOfMeal;
+        return list;
     }
 }
