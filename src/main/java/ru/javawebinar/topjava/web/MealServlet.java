@@ -32,6 +32,7 @@ public class MealServlet extends HttpServlet {
             new UserMeal(LocalDateTime.of(2016, Month.MARCH, 7, 14, 0), "Обед", 500),
             new UserMeal(LocalDateTime.of(2016, Month.MARCH, 7, 18, 0), "Ужин", 510)
     );
+// data for simple test
     private List<String> list = Arrays.asList(
             "Anton","Petr","frank"
     );
@@ -42,13 +43,12 @@ public class MealServlet extends HttpServlet {
 
 //        req.setAttribute("list", getMealWithExceedFor(7, 15, 2000));
 
-        req.setAttribute("name", "Serg");
+        req.setAttribute("name", "Serg");  // try send one word as name
 
-        LOG.debug("on jsp");
         req.setAttribute("list", list);
         req.getRequestDispatcher("/mealList.jsp").forward(req,resp);
     }
-
+// method for testing
     private List<UserMealWithExceed> getMealWithExceedFor(int hourS, int houtE, int callories){
         return UserMealsUtil.getFilteredMealsWithExceeded(mealList, LocalTime.of(hourS, 0), LocalTime.of(houtE, 0), callories);
     }
