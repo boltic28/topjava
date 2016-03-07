@@ -41,13 +41,21 @@ public class MealServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("names", "antoniy");
+        System.out.println("go = " + request.getParameter("go"));
+//        if(request.getParameter("go") != null){
+        System.out.println("__________________");
+            System.out.println(request.getParameter("filter_date"));
+            System.out.println(request.getParameter("filter_st"));
+            System.out.println(request.getParameter("filter_et"));
+            System.out.println(request.getParameter("cal_lim"));
+//        }
         request.setAttribute("list", getMealWithExceedFor(7, 20, 2000));
 
 
         request.getRequestDispatcher("/mealList.jsp").forward(request, response);
     }
 
-    private List<UserMealWithExceed> getMealWithExceedFor(int hourS, int houtE, int callories){
-        return UserMealsUtil.getFilteredMealsWithExceeded(mealList, LocalTime.of(hourS, 0), LocalTime.of(houtE, 0), callories);
+    private List<UserMealWithExceed> getMealWithExceedFor(int hourS, int hourE, int callories){
+        return UserMealsUtil.getFilteredMealsWithExceeded(mealList, LocalTime.of(hourS, 0), LocalTime.of(hourE, 0), callories);
     }
 }
