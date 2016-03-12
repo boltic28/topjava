@@ -84,6 +84,7 @@ public class User extends NamedEntity {
         return password;
     }
 
+
     @Override
     public String toString() {
         return "User (" +

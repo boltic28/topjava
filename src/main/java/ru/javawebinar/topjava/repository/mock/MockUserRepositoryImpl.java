@@ -37,7 +37,7 @@ public class MockUserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getAll() {
-        LOG.info("getAll");
+        LOG.info("getAllForUser");
         return Collections.emptyList();
     }
 
