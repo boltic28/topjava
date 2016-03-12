@@ -18,7 +18,7 @@
 <body>
 <section>
     <h2><a href="index.html">Home</a></h2>
-    <h3>Meal list</h3>
+    <h3>Meal list of <i>${user.name}</i> with id <i>${user.id}</i></h3>
     <a href="meals?action=create">Add Meal</a>
     <hr>
     <table border="1" cellpadding="8" cellspacing="0">

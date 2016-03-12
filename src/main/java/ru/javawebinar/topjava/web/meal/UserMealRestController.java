@@ -9,4 +9,5 @@ import ru.javawebinar.topjava.service.UserMealService;
 public class UserMealRestController {
     private UserMealService service;
 
+
 }

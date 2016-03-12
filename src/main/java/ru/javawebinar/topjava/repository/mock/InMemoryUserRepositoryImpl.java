@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Сергей on 12.03.2016.
  */
-public class InMemoryUserRepositoryImpl implements UserRepository {
+public class InMemoryUserRepositoryImpl extends MockUserRepositoryImpl {
     private Map<Integer, User> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
 
@@ -28,6 +28,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user) {
+        super.save(user);
         if (user.isNew()) {
             user.setId(counter.incrementAndGet());
         }
@@ -37,6 +38,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean delete(int id) {
+        super.delete(id);
         try {
             repository.remove(id);
             return true;
@@ -47,6 +49,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     @Override
     public User get(int id) {
+        super.get(id);
         try {
             return repository.get(id);
         } catch (NotFoundException e) {
@@ -56,6 +59,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     @Override
     public User getByEmail(String email) {
+        super.getByEmail(email);
             for(Map.Entry<Integer, User> user:repository.entrySet()){
                 if(user.getValue().getEmail().equalsIgnoreCase(email))
                     return user.getValue();
@@ -66,6 +70,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getAll() {
+        super.getAll();
         return repository.values().stream()
                 .sorted((p1, p2) -> p1.getName().compareTo(p2.getName()))
                 .collect(Collectors.toList());
