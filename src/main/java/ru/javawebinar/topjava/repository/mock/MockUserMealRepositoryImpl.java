@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.repository.mock;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
@@ -11,6 +12,7 @@ import java.util.Collection;
 /**
  * Created by Сергей on 12.03.2016.
  */
+@Repository
 public class MockUserMealRepositoryImpl implements UserMealRepository {
     private static final Logger LOG = LoggerFactory.getLogger(MockUserMealRepositoryImpl.class);
 

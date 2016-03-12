@@ -20,5 +20,5 @@ public interface UserMealService {
 
     List<UserMeal> getAll(User user);
 
-    List<UserMeal> getBetweenTime(LocalDateTime start, LocalDateTime end);
+    List<UserMeal> getBetweenTime(LocalDateTime start, LocalDateTime end, User user);
 }
