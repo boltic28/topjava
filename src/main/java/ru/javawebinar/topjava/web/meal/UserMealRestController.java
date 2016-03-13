@@ -27,26 +27,26 @@ public class UserMealRestController {
         return mealService.getAll(user);
     }
 
-    public UserMeal get(int id) {
+    public UserMeal get(int id, User user) {
         LOG.info("get meal " + id);
-        return mealService.get(id);
+        return mealService.get(id, user);
     }
 
-    public UserMeal create(UserMeal userMeal) {
+    public UserMeal create(UserMeal userMeal, User user) {
         userMeal.setId(0);
         LOG.info("create " + userMeal);
-        return mealService.save(userMeal);
+        return mealService.save(userMeal, user);
     }
 
-    public void delete(int id) {
+    public void delete(int id, User user) {
         LOG.info("delete " + id);
-        mealService.delete(id);
+        mealService.delete(id, user);
     }
 
-    public void update(UserMeal userMeal, int id) {
+    public void update(UserMeal userMeal, int id, User user) {
         userMeal.setId(id);
         LOG.info("update " + userMeal);
-        mealService.save(userMeal);
+        mealService.save(userMeal, user);
     }
 
     public List<UserMeal> getBetweenTime(LocalDateTime start, LocalDateTime end) {

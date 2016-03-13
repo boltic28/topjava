@@ -18,18 +18,18 @@ public class MockUserMealRepositoryImpl implements UserMealRepository {
     private static final Logger LOG = LoggerFactory.getLogger(MockUserMealRepositoryImpl.class);
 
     @Override
-    public UserMeal save(UserMeal userMeal) {
+    public UserMeal save(UserMeal userMeal, User user) {
         LOG.info("save " + userMeal.getDescription() + " " + userMeal.getId());
         return userMeal;
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id, User user) {
         LOG.info("delete meal with id  " + id);
     }
 
     @Override
-    public UserMeal get(int id) {
+    public UserMeal get(int id, User user) {
         LOG.info("get meal with id  " + id);
         return null;
     }

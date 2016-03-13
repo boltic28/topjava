@@ -12,11 +12,11 @@ import java.util.List;
  */
 public interface UserMealService {
 
-    UserMeal save(UserMeal userMeal);
+    UserMeal save(UserMeal userMeal, User user);
 
-    void delete(int id);
+    void delete(int id, User user);
 
-    UserMeal get(int id);
+    UserMeal get(int id, User user);
 
     List<UserMeal> getAll(User user);
 

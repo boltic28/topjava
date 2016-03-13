@@ -3,8 +3,6 @@ package ru.javawebinar.topjava.repository.mock;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.model.UserMeal;
-import ru.javawebinar.topjava.repository.UserMealRepository;
-import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -38,11 +36,11 @@ public class InMemoryUserMealRepositoryImpl extends MockUserMealRepositoryImpl {
 
     @Override
     public UserMeal save(UserMeal userMeal, User user) {
-        super.save(userMeal);
+        super.save(userMeal, user);
         if (userMeal.isNew()) {
             userMeal.setId(counter.incrementAndGet());
         }
-        if (userMeal.getOwner().getId() == user.getId()) {
+        if (Objects.equals(userMeal.getOwner().getId(), user.getId())) {
             repository.put(userMeal.getId(), userMeal);
         }
         return userMeal;
@@ -50,16 +48,19 @@ public class InMemoryUserMealRepositoryImpl extends MockUserMealRepositoryImpl {
 
     @Override
     public void delete(int id, User user) {
-        super.delete(id);
-        if( repository.get(id).getOwner().getId() == user.getId()) {
+        super.delete(id, user);
+        if(Objects.equals(repository.get(id).getOwner().getId(), user.getId())) {
             repository.remove(id);
         }
     }
 
     @Override
-    public UserMeal get(int id) {
-        super.get(id);
-        return repository.get(id);
+    public UserMeal get(int id, User user) {
+        super.get(id, user);
+        if(repository.get(id).getOwner().getId().equals(user.getId())) {
+            return repository.get(id);
+        }
+        return null;
     }
 
     @Override

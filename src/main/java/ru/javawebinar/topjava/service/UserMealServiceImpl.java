@@ -21,19 +21,19 @@ public class UserMealServiceImpl implements UserMealService {
     private UserMealRepository mealRepository;
 
     @Override
-    public UserMeal save(UserMeal userMeal) {
-        mealRepository.save(userMeal);
+    public UserMeal save(UserMeal userMeal, User user) {
+        mealRepository.save(userMeal, user);
         return userMeal;
     }
 
     @Override
-    public void delete(int id) {
-        mealRepository.delete(id);
+    public void delete(int id, User user) {
+        mealRepository.delete(id, user);
     }
 
     @Override
-    public UserMeal get(int id) {
-        return mealRepository.get(id);
+    public UserMeal get(int id, User user) {
+        return mealRepository.get(id, user);
     }
 
     @Override
