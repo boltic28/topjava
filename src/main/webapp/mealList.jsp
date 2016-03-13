@@ -21,6 +21,19 @@
     <h3>Meal list of <i>${user.name}</i> with id <i>${user.id}</i></h3>
     <a href="meals?action=create">Add Meal</a>
     <hr>
+    <h3>Filter</h3>
+    <form>
+        <table border="0px">
+            <tr>
+                <td>Date and Time from:</td><td><input type="datetime-local" name="dt_start" size="10"></td>
+            </tr>
+            <tr>
+                <td>Date and Time to:</td><td><input type="datetime-local" name="dt_end" size="10"></td>
+            </tr>
+        </table>
+        <input type="submit" name="action" value="filter">
+    </form>
+    <hr>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>

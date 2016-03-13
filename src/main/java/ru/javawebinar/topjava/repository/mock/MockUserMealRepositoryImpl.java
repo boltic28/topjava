@@ -7,6 +7,7 @@ import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 /**
@@ -36,6 +37,12 @@ public class MockUserMealRepositoryImpl implements UserMealRepository {
     @Override
     public Collection<UserMeal> getAllForUser(User user) {
         LOG.info("get all meals for name  " + user.getName());
+        return null;
+    }
+
+    @Override
+    public Collection<UserMeal> getAllForUserBetweenDT(LocalDateTime sdt, LocalDateTime edt, User user) {
+        LOG.info("get all meals beetween dt for name  " + user.getName());
         return null;
     }
 }

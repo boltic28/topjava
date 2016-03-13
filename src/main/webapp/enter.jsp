@@ -12,7 +12,8 @@
 </head>
 <body>
     <form>
-        enter your id: <input type="number" name="user_id">
+        enter your e-mail: <input type="email" name="user_mail"><br>
+        enter your password: <input type="password" name="user_pass"><br>
         <input type="submit" value="Enter" name="enter">
     </form>
 </body>

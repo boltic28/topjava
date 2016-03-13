@@ -67,5 +67,16 @@ public class InMemoryUserMealRepositoryImpl extends MockUserMealRepositoryImpl {
                 .collect(Collectors.toList());
     return list.size() > 0 ? list : null;
     }
+
+    @Override
+    public Collection<UserMeal> getAllForUserBetweenDT(LocalDateTime sdt, LocalDateTime edt, User user) {
+        super.getAllForUser(user);
+        List<UserMeal> list = repository.values().stream()
+                .filter(meal -> Objects.equals(meal.getOwner().getId(), user.getId()))
+                .filter(meal -> meal.getDateTime().isAfter(sdt) && meal.getDateTime().isBefore(edt))
+                .sorted((m1,m2) -> m1.getDateTime().compareTo(m2.getDateTime()))
+                .collect(Collectors.toList());
+        return list.size() > 0 ? list : null;
+    }
 }
 
