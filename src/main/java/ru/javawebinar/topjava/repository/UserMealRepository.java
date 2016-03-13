@@ -11,9 +11,9 @@ import java.util.Collection;
  * 06.03.2015.
  */
 public interface UserMealRepository {
-    UserMeal save(UserMeal userMeal);
+    UserMeal save(UserMeal userMeal, User user);
 
-    void delete(int id);
+    void delete(int id, User user);
 
     UserMeal get(int id);
 

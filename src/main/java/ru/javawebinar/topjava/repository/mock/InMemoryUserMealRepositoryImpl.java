@@ -37,19 +37,23 @@ public class InMemoryUserMealRepositoryImpl extends MockUserMealRepositoryImpl {
     }
 
     @Override
-    public UserMeal save(UserMeal userMeal) {
+    public UserMeal save(UserMeal userMeal, User user) {
         super.save(userMeal);
         if (userMeal.isNew()) {
             userMeal.setId(counter.incrementAndGet());
         }
-        repository.put(userMeal.getId(), userMeal);
+        if (userMeal.getOwner().getId() == user.getId()) {
+            repository.put(userMeal.getId(), userMeal);
+        }
         return userMeal;
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id, User user) {
         super.delete(id);
-        repository.remove(id);
+        if( repository.get(id).getOwner().getId() == user.getId()) {
+            repository.remove(id);
+        }
     }
 
     @Override

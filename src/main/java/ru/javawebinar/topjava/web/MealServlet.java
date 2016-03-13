@@ -55,7 +55,7 @@ public class MealServlet extends HttpServlet {
                 currentUser);
 
         LOG.info(userMeal.isNew() ? "Create {}" : "Update {}", userMeal);
-        repository.save(userMeal);
+        repository.save(userMeal, currentUser);
         response.sendRedirect("meals?user_id=" + currentUser.getId());
     }
 
@@ -100,7 +100,7 @@ public class MealServlet extends HttpServlet {
             } else if (action.equals("delete")) {
                 int id = getId(request);
                 LOG.info("Delete {}", id);
-                repository.delete(id);
+                repository.delete(id, currentUser);
                 response.sendRedirect("meals");
 
             } else if (action.equals("filter")) {
