@@ -63,22 +63,22 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public boolean delete(int id, int userId) {
-        return jdbcTemplate.update("DELETE FROM meals WHERE id=?,user_id=?", id, userId) != 0;
+        return jdbcTemplate.update("DELETE FROM meals WHERE id=? AND user_id=?", id, userId) != 0;
     }
 
     @Override
     public UserMeal get(int id, int userId) {
-        List<UserMeal> meals = jdbcTemplate.query("SELECT * FROM meals WHERE id=?, user_id=?", ROW_MAPPER, id, userId);
+        List<UserMeal> meals = jdbcTemplate.query("SELECT * FROM meals WHERE id=? AND user_id=?", ROW_MAPPER, id, userId);
         return DataAccessUtils.singleResult(meals);
     }
 
     @Override
     public List<UserMeal> getAll(int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=?", ROW_MAPPER, userId);
+        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? ORDER BY datetime", ROW_MAPPER, userId);
     }
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals WHERE datetime>? && datetime<? && user_id=?", ROW_MAPPER, Timestamp.valueOf(startDate), Timestamp.valueOf(endDate), userId);
+        return jdbcTemplate.query("SELECT * FROM meals WHERE datetime>? AND datetime<? AND user_id=?", ROW_MAPPER, Timestamp.valueOf(startDate), Timestamp.valueOf(endDate), userId);
     }
 }

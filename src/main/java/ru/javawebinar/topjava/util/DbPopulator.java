@@ -5,6 +5,7 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
@@ -12,7 +13,7 @@ import javax.sql.DataSource;
  * User: gkislin
  * Date: 26.08.2014
  */
-
+@Component
 public class DbPopulator extends ResourceDatabasePopulator {
     private static final ResourceLoader RESOURCE_LOADER = new DefaultResourceLoader();
 

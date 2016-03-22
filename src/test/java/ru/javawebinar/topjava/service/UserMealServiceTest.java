@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 
-public class UserMealServiceImplTest {
+public class UserMealServiceTest {
 
     @Autowired
     UserMealService mealService;
